@@ -1,11 +1,10 @@
-const express = require("express");
+import express from "express";
+import routes from "./src/routes.js";
 const app = express();
-const port = 3000;
+const port = 8080;
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
+app.use("/", routes);
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+  console.log(`Mountain Horses API listening on port ${port}`);
 });
