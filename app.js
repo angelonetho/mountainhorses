@@ -1,7 +1,10 @@
 import express from "express";
 import routes from "./src/routes.js";
+
 const app = express();
 const port = 8080;
+
+app.use(express.json());
 
 app.use("/v1/", routes);
 
