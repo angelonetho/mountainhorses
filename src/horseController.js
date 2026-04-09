@@ -5,9 +5,9 @@ export const fetch = (req, res) => {
 };
 
 export const create = (req, res) => {
-  const cavalo = { id: Date.now(), ...req.body };
-  horses.push(cavalo);
-  res.status(201).json(cavalo);
+  const horse = { id: Date.now(), ...req.body };
+  horses.push(horse);
+  res.status(201).json(horse);
 };
 
 export const update = (req, res) => {
