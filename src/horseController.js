@@ -1,9 +1,8 @@
-import db from "./db.js";
+import * as horseService from "./horseService.js";
 
 const validateHorse = (body) => {
   const { name, breed, age, color, weight, height, health_status } = body;
   const errors = [];
-
   if (!name || typeof name !== "string") errors.push("name é obrigatório");
   if (!breed || typeof breed !== "string") errors.push("breed é obrigatório");
   if (!age || typeof age !== "number" || age <= 0)
@@ -15,14 +14,13 @@ const validateHorse = (body) => {
     errors.push("height deve ser um número positivo");
   if (!health_status || typeof health_status !== "string")
     errors.push("health_status é obrigatório");
-
   return errors;
 };
 
 export const fetch = async (req, res) => {
   try {
-    const [rows] = await db.query("SELECT * FROM horses");
-    res.json(rows);
+    const horses = await horseService.findAll();
+    res.json(horses);
   } catch (error) {
     res
       .status(500)
@@ -35,12 +33,8 @@ export const create = async (req, res) => {
     const errors = validateHorse(req.body);
     if (errors.length > 0) return res.status(400).json({ errors });
 
-    const { name, breed, age, color, weight, height, health_status } = req.body;
-    const [result] = await db.query(
-      "INSERT INTO horses (name, breed, age, color, weight, height, health_status) VALUES (?, ?, ?, ?, ?, ?, ?)",
-      [name, breed, age, color, weight, height, health_status]
-    );
-    res.status(201).json({ id: result.insertId, ...req.body });
+    const horse = await horseService.insert(req.body);
+    res.status(201).json(horse);
   } catch (error) {
     res
       .status(500)
@@ -51,22 +45,15 @@ export const create = async (req, res) => {
 export const update = async (req, res) => {
   try {
     const { id } = req.params;
-
-    const [existing] = await db.query("SELECT id FROM horses WHERE id = ?", [
-      id,
-    ]);
-    if (existing.length === 0)
+    const existing = await horseService.findById(id);
+    if (!existing)
       return res.status(404).json({ message: "Cavalo não encontrado" });
 
     const errors = validateHorse(req.body);
     if (errors.length > 0) return res.status(400).json({ errors });
 
-    const { name, breed, age, color, weight, height, health_status } = req.body;
-    await db.query(
-      "UPDATE horses SET name=?, breed=?, age=?, color=?, weight=?, height=?, health_status=? WHERE id=?",
-      [name, breed, age, color, weight, height, health_status, id]
-    );
-    res.json({ id, ...req.body });
+    const horse = await horseService.updateById(id, req.body);
+    res.json(horse);
   } catch (error) {
     res
       .status(500)
@@ -77,14 +64,11 @@ export const update = async (req, res) => {
 export const remove = async (req, res) => {
   try {
     const { id } = req.params;
-
-    const [existing] = await db.query("SELECT id FROM horses WHERE id = ?", [
-      id,
-    ]);
-    if (existing.length === 0)
+    const existing = await horseService.findById(id);
+    if (!existing)
       return res.status(404).json({ message: "Cavalo não encontrado" });
 
-    await db.execute("DELETE FROM horses WHERE id = ?", [id]);
+    await horseService.deleteById(id);
     res.status(204).send();
   } catch (error) {
     res

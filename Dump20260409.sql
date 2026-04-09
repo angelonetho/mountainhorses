@@ -42,7 +42,7 @@ CREATE TABLE `horses` (
 
 LOCK TABLES `horses` WRITE;
 /*!40000 ALTER TABLE `horses` DISABLE KEYS */;
-INSERT INTO `horses` VALUES (1,'Trovão','Campolina',7,'Alazão',480.50,1.58,'Saudável','2026-04-09 04:07:47'),(2,'Trovão','Campolina',7,'Alazão',480.50,1.58,'Saudável','2026-04-09 04:07:56'),(3,'Trovão','Campolina',7,'Alazão',480.50,1.58,'Saudável','2026-04-09 04:10:15'),(4,'Trovão','Campolina',7,'Alazão',480.50,1.58,'Saudável','2026-04-09 04:14:02'),(5,'Trovão','Campolina',7,NULL,480.50,1.58,'Saudável','2026-04-09 04:14:17'),(6,'Trovão','Campolina',7,'Alazão',480.50,1.58,'Saudável','2026-04-09 04:14:23'),(7,'Trovão','Campolina',7,'Alazão',480.50,1.58,'Saudável','2026-04-09 04:14:47'),(8,'Trovão','Campolina',7,'Alazão',480.50,1.58,'Saudável','2026-04-09 04:17:19');
+INSERT INTO `horses` VALUES (1,'Trovão','Campolina',7,'Alazão',480.50,1.58,'Saudável','2026-04-09 04:07:47'),(2,'Trovão','Campolina',7,'Alazão',480.50,1.58,'Saudável','2026-04-09 04:07:56'),(3,'Trovão','Campolina',7,'Alazão',480.50,1.58,'Saudável','2026-04-09 04:10:15'),(4,'Trovão','Campolina',7,'Alazão',480.50,1.58,'Saudável','2026-04-09 04:14:02'),(5,'Trovão','Campolina',7,'Alazão',480.50,1.58,'Saudável','2026-04-09 04:14:17'),(6,'Trovão','Campolina',7,'Alazão',480.50,1.58,'Saudável','2026-04-09 04:14:23'),(7,'Trovão','Campolina',7,'Alazão',480.50,1.58,'Saudável','2026-04-09 04:14:47'),(8,'Trovão','Campolina',7,'Alazão',480.50,1.58,'Saudável','2026-04-09 04:17:19');
 /*!40000 ALTER TABLE `horses` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
